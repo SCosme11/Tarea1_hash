@@ -10,7 +10,29 @@ def char_a_bin(texto):
 def agregar_padding(men_bin):
     longitud = len(men_bin)
     men_bin += "1"
-    ceros = 32 - (len(men_bin) % 32)
+    ceros = 32 - (longitud % 32)
     men_bin += "0" * ceros #agrego padding
     men_bin += bin(longitud)[2:].zfill(32) #agrego longitud de mensaje original
     return men_bin
+
+def procesar(men_bin):
+    h = #estado interno inicial h0
+    for i in range(0, len(men_bin), 32):
+        bloque = men_bin[i:i+32]
+        h_num = int(h, 2)
+        m_num = int(bloque, 2) #convertimos a números para que sean más sencillas las operaciones
+        for j in range(8):
+            # 1. Suma modular usando la ronda (j)
+            mezcla = (h_num + m_num + j) % 2**32
+            # 2. XOR con la constante
+            mezcla = mezcla ^ 0x55555555 #01010101
+            
+            # 3. Rotación de 3 posiciones
+            mezcla = ((mezcla << 3) % 2**32) | (mezcla >> 29)
+            
+            # 4. Actualizamos el bloque para la siguiente ronda
+            m_num = mezcla
+        h_num = (h_num + mezcla) % 2**32
+        h = bin(h_num)[2:].zfill(32)
+    resultado_final = hex(h_num)[2:].zfill(8)
+    return resultado_final
