@@ -36,3 +36,14 @@ def procesar(men_bin):
         h = bin(h_num)[2:].zfill(32)
     resultado_final = hex(h_num)[2:].zfill(8)
     return resultado_final
+
+def mi_hash(texto):
+    binario_inicial = char_a_bin(texto)
+    binario_con_padding = agregar_padding(binario_inicial)
+    return procesar(binario_con_padding)
+
+hash_1 = mi_hash("gato")
+hash_2 = mi_hash("pato")
+
+print("Hash de 'gato':", hash_1)
+print("Hash de 'pato':", hash_2)
