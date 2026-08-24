@@ -16,7 +16,7 @@ def agregar_padding(men_bin):
     return men_bin
 
 def procesar(men_bin):
-    h = #estado interno inicial h0
+    h = "01101010000010011110011001100111" #estado interno inicial h0, primeros 32 bits parte fraccionaria raíz de 2
     for i in range(0, len(men_bin), 32):
         bloque = men_bin[i:i+32]
         h_num = int(h, 2)
