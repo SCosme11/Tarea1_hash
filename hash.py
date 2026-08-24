@@ -15,13 +15,13 @@ def agregar_padding(men_bin):
     men_bin += bin(longitud)[2:].zfill(32) #agrego longitud de mensaje original
     return men_bin
 
-def procesar(men_bin):
+def procesar(men_bin, rondas):
     h = "01101010000010011110011001100111" #estado interno inicial h0, primeros 32 bits parte fraccionaria raíz de 2
     for i in range(0, len(men_bin), 32):
         bloque = men_bin[i:i+32]
         h_num = int(h, 2)
         m_num = int(bloque, 2) #convertimos a números para que sean más sencillas las operaciones
-        for j in range(8):
+        for j in range(rondas):
             # 1. Suma modular usando la ronda (j)
             mezcla = (h_num + m_num + j) % 2**32
             # 2. XOR con la constante
@@ -40,7 +40,7 @@ def procesar(men_bin):
 def mi_hash(texto):
     binario_inicial = char_a_bin(texto)
     binario_con_padding = agregar_padding(binario_inicial)
-    return procesar(binario_con_padding)
+    return procesar(binario_con_padding, 8)
 
 hash_1 = mi_hash("gato")
 hash_2 = mi_hash("pato")
