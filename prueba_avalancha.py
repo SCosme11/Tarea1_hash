@@ -1,4 +1,5 @@
 from hash import *
+from salidas import carpeta_prueba
 import csv
 import math
 import os
