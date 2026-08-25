@@ -10,9 +10,10 @@ def char_a_bin(texto):
 def agregar_padding(men_bin):
     longitud = len(men_bin)
     men_bin += "1"
-    ceros = 32 - (longitud % 32)
-    men_bin += "0" * ceros #agrego padding
-    men_bin += bin(longitud)[2:].zfill(32) #agrego longitud de mensaje original
+    # Ceros hasta que el mensaje+1 sea múltiplo de 32; luego van 32 bits de longitud
+    ceros = (32 - (len(men_bin) % 32)) % 32
+    men_bin += "0" * ceros
+    men_bin += bin(longitud)[2:].zfill(32)
     return men_bin
 
 def procesar(men_bin, rondas):
@@ -42,8 +43,10 @@ def mi_hash(texto):
     binario_con_padding = agregar_padding(binario_inicial)
     return procesar(binario_con_padding, 8)
 
-hash_1 = mi_hash("gato")
-hash_2 = mi_hash("pato")
 
-print("Hash de 'gato':", hash_1)
-print("Hash de 'pato':", hash_2)
+if __name__ == "__main__":
+    hash_1 = mi_hash("gato")
+    hash_2 = mi_hash("pato")
+
+    print("Hash de 'gato':", hash_1)
+    print("Hash de 'pato':", hash_2)
