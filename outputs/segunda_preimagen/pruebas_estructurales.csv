@@ -1,0 +1,6 @@
+prueba,funciona,observacion
+Relleno ambiguo,NO,La longitud original está incluida en el padding.
+Permutación de bloques,NO,El estado se actualiza en orden y la compresión no es conmutativa.
+Extensión de longitud,NO,La API solo acepta mensajes completos y vuelve a aplicar padding; no expone un estado intermedio.
+Linealidad sobre F2,NO,Prueba puntual con entradas distintas; no constituye una demostración universal.
+Puntos fijos,NO,No se encontró un punto fijo en la búsqueda puntual de la compresión disponible.
